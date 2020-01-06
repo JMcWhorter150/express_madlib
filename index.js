@@ -5,15 +5,17 @@ const app = express();
 
 const server = http.createServer(app);
 
-const VIPS = ['Joe', 'Oakley', 'Matt Damon'];
+const VIPS = {'Joe':"How wonderfully splendid it is to be in your presence again!",
+'Oakley': "Oh hey....",
+'Matt Damon': "Hello, "};
 
 app.get(`/`, (req, res) => {
     res.send(`Please enter your name after the / in the URL`);
 })
 
 app.get(`/:name`, (req, res) => {
-    if (VIPS.includes(req.params.name)) {
-        res.send(`How wonderfully splendid it is to be in your presence again, ${req.params.name}! You look magnificent today.`);
+    if (Object.keys(VIPS).includes(req.params.name)) {
+        res.send(`${VIPS[req.params.name]}`);
     } else{
         res.send(`Hello, ${req.params.name}!`);
     }
